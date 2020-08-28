@@ -1,16 +1,9 @@
-# Fabric Example Mod
+# Swift API
 
-## Setup
+## Description
 
-1. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-2. Run the following command:
-
-```
-./gradlew idea
-```
+This was designed to be an api to help developers migrate from the Spigot ecosystem to the fabric ecosystem. Its long term goals include also been a viable spigot replacment.
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This code is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
