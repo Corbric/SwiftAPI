@@ -15,9 +15,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "swifthq.net.swiftapi.SwiftApi"
+      "net.swifthq.swiftapi.SwiftApi"
     ]
   },
+  "mixins": [
+    "swift.mixins.json"
+  ],
   "accessWidener": "swiftapi.aw",
   "depends": {
     "fabricloader": ">=0.7.4"

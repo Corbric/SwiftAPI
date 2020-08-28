@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.swifthq.swiftapi.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "server": [
+    "MinecraftServerMixin",
+    "ServerPlayerInteractionManagerMixin",
+    "ServerPlayerNetworkHandlerMixin",
+    "PlayerManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
