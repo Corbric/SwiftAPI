@@ -33,7 +33,7 @@ public class ConfigManager {
         }
         try {
             String text = FileUtils.readFileToString(CONFIG_DIR.resolve(name).toFile(), StandardCharsets.UTF_8);
-            return SwiftApi.createDefaultBuilder().create().fromJson(text, gsonSerialisator);
+            return SwiftApi.GSON.fromJson(text, gsonSerialisator);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -49,7 +49,7 @@ public class ConfigManager {
         try {
             CONFIG_DIR.toFile().mkdirs();
             FileWriter writer = new FileWriter(CONFIG_DIR.resolve(name).toFile());
-            writer.write(SwiftApi.createDefaultBuilder().create().toJson(serializationClass));
+            writer.write(SwiftApi.GSON.toJson(serializationClass));
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
