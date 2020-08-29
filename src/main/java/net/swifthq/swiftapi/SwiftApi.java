@@ -64,8 +64,8 @@ public class SwiftApi implements ModInitializer {
                 .registerTypeAdapter(ItemStack.class, new ItemStackSerializer())
                 .registerTypeHierarchyAdapter(Tag.class, new TagBasedSerializer())
                 // Registry based
-                .registerTypeAdapter(Block.class, new RegistryBasedSerializer<>(Block.REGISTRY))
-                .registerTypeAdapter(Item.class, new RegistryBasedSerializer<>(Item.REGISTRY))
+                .registerTypeHierarchyAdapter(Block.class, new RegistryBasedSerializer<>(Block.REGISTRY))
+                .registerTypeHierarchyAdapter(Item.class, new RegistryBasedSerializer<>(Item.REGISTRY))
                 ;
     }
 }
