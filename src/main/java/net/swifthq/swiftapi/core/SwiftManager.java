@@ -1,6 +1,7 @@
 package net.swifthq.swiftapi.core;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.ClientConnection;
 import net.swifthq.swiftapi.player.Player;
 
 import java.util.HashMap;
@@ -25,6 +26,10 @@ public class SwiftManager {
     }
 
     public boolean isPlayerBusy(Player player){
-        return !player.inBattle || !player.requestsDisabled;
+        return !player.inBattle;
+    }
+
+    public void removePlayer(ServerPlayerEntity player) {
+        playerMap.remove(player);
     }
 }

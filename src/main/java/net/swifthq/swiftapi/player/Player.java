@@ -6,8 +6,9 @@ import net.swifthq.swiftapi.player.inventory.SwiftInventory;
 
 public class Player {
 
+    //TODO: implement a properties system for players so mods can register stuff
+
     public boolean inBattle;
-    public boolean requestsDisabled;
     public ServerPlayerEntity minecraftPlayer;
 
     public Player(ServerPlayerEntity minecraftPlayer) {
