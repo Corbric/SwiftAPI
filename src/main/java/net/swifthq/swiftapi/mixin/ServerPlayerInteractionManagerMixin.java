@@ -21,22 +21,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ServerPlayerInteractionManagerMixin {
 
     @Shadow
+    public ServerPlayerEntity player;
+
+    @Shadow
     private LevelInfo.GameMode gameMode;
 
-    @Shadow public ServerPlayerEntity player;
-
     @Inject(method = "method_6094", at = @At("HEAD"), cancellable = true)
-    public void onBlockBreak(BlockPos blockPos, CallbackInfoReturnable<Boolean> cir){
+    public void onBlockBreak(BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
         if (this.gameMode.isCreative() && this.player.method_7107() != null && this.player.method_7107().getItem() instanceof SwordItem) {
             cir.setReturnValue(true);
-        }else{
+        } else {
             cir.setReturnValue(PlayerBlockBreakCallback.EVENT.invoker().breakBlock(blockPos));
         }
     }
 
     @Inject(method = "method_6091", at = @At("HEAD"), cancellable = true)
-    public void onInteract(PlayerEntity playerEntity, World world, ItemStack itemStack, BlockPos blockPos, Direction direction, float f, float g, float h, CallbackInfoReturnable<Boolean> cir){
-        //FIXME: in PlayerConnection line 717 has something to detect air right clicks. need to implement ASAP
+    public void onInteract(PlayerEntity playerEntity, World world, ItemStack itemStack, BlockPos blockPos, Direction direction, float f, float g, float h, CallbackInfoReturnable<Boolean> cir) {
+        // FIXME: in PlayerConnection line 717 has something to detect air right clicks. need to implement ASAP
         cir.setReturnValue(PlayerItemInteractCallback.EVENT.invoker().interactItem(playerEntity, itemStack));
     }
 }

@@ -1,15 +1,16 @@
 package net.swifthq.swiftapi;
 
-import java.util.Map;
-import java.util.regex.Pattern;
-
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.Validate;
+
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * All supported color values for chat
  */
 public enum ChatColor {
+
     /**
      * Represents black
      */
@@ -105,53 +106,31 @@ public enum ChatColor {
      */
     public static final char COLOR_CHAR = '\u00A7';
     private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)" + COLOR_CHAR + "[0-9A-FK-OR]");
+    private final static Map<Integer, ChatColor> BY_ID = Maps.newHashMap();
+    private final static Map<Character, ChatColor> BY_CHAR = Maps.newHashMap();
+
+    static {
+        for (ChatColor color : values()) {
+            BY_ID.put(color.intCode, color);
+            BY_CHAR.put(color.code, color);
+        }
+    }
 
     private final int intCode;
     private final char code;
     private final boolean isFormat;
     private final String toString;
-    private final static Map<Integer, ChatColor> BY_ID = Maps.newHashMap();
-    private final static Map<Character, ChatColor> BY_CHAR = Maps.newHashMap();
 
-    private ChatColor(char code, int intCode) {
+    ChatColor(char code, int intCode) {
         this(code, intCode, false);
     }
 
-    private ChatColor(char code, int intCode, boolean isFormat) {
+    ChatColor(char code, int intCode, boolean isFormat) {
         this.code = code;
         this.intCode = intCode;
         this.isFormat = isFormat;
-        this.toString = new String(new char[] {COLOR_CHAR, code});
+        this.toString = new String(new char[]{COLOR_CHAR, code});
     }
-
-    /**
-     * Gets the char value associated with this color
-     *
-     * @return A char value of this color code
-     */
-    public char getChar() {
-        return code;
-    }
-
-    @Override
-    public String toString() {
-        return toString;
-    }
-
-    /**
-     * Checks if this code is a format code as opposed to a color code.
-     */
-    public boolean isFormat() {
-        return isFormat;
-    }
-
-    /**
-     * Checks if this code is a color code as opposed to a format code.
-     */
-    public boolean isColor() {
-        return !isFormat && this != RESET;
-    }
-
 
     public static ChatColor getByChar(char code) {
         return BY_CHAR.get(code);
@@ -184,16 +163,16 @@ public enum ChatColor {
      * character. The alternate color code character will only be replaced if
      * it is immediately followed by 0-9, A-F, a-f, K-O, k-o, R or r.
      *
-     * @param altColorChar The alternate color code character to replace. Ex: &
+     * @param altColorChar    The alternate color code character to replace. Ex: &
      * @param textToTranslate Text containing the alternate color code character.
      * @return Text containing the ChatColor.COLOR_CODE color code character.
      */
     public static String translateAlternateColorCodes(char altColorChar, String textToTranslate) {
         char[] b = textToTranslate.toCharArray();
         for (int i = 0; i < b.length - 1; i++) {
-            if (b[i] == altColorChar && "0123456789AaBbCcDdEeFfKkLlMmNnOoRr".indexOf(b[i+1]) > -1) {
+            if (b[i] == altColorChar && "0123456789AaBbCcDdEeFfKkLlMmNnOoRr".indexOf(b[i + 1]) > -1) {
                 b[i] = ChatColor.COLOR_CHAR;
-                b[i+1] = Character.toLowerCase(b[i+1]);
+                b[i + 1] = Character.toLowerCase(b[i + 1]);
             }
         }
         return new String(b);
@@ -230,10 +209,31 @@ public enum ChatColor {
         return result;
     }
 
-    static {
-        for (ChatColor color : values()) {
-            BY_ID.put(color.intCode, color);
-            BY_CHAR.put(color.code, color);
-        }
+    /**
+     * Gets the char value associated with this color
+     *
+     * @return A char value of this color code
+     */
+    public char getChar() {
+        return code;
+    }
+
+    @Override
+    public String toString() {
+        return toString;
+    }
+
+    /**
+     * Checks if this code is a format code as opposed to a color code.
+     */
+    public boolean isFormat() {
+        return isFormat;
+    }
+
+    /**
+     * Checks if this code is a color code as opposed to a format code.
+     */
+    public boolean isColor() {
+        return !isFormat && this != RESET;
     }
 }

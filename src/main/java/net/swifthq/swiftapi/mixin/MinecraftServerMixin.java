@@ -16,14 +16,13 @@ public class MinecraftServerMixin {
 
     DimensionRegistry dimensionRegistry = new DimensionRegistry();
 
-    @Inject(method = "setupWorld(Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/world/level/LevelGeneratorType;Ljava/lang/String;)V", at = @At("HEAD"))
-    public void addFabricDimensions(String world, String string, long l, LevelGeneratorType generatorType, String string2, CallbackInfo ci){
-        DimensionRegisterCallback.EVENT.invoker().registerDimension(dimensionRegistry);
+    @ModifyConstant(method = "setupWorld(Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/world/level/LevelGeneratorType;Ljava/lang/String;)V", constant = @Constant(intValue = 3))
+    private static int replaceDimensionCount(int original) {
+        return original + DimensionRegistry.FABRIC_DIMENSIONS.size();
     }
 
-
-    @ModifyConstant(method = "setupWorld(Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/world/level/LevelGeneratorType;Ljava/lang/String;)V", constant = @Constant(intValue = 3))
-    private static int replaceDimensionCount(int original){
-        return original + DimensionRegistry.FABRIC_DIMENSIONS.size();
+    @Inject(method = "setupWorld(Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/world/level/LevelGeneratorType;Ljava/lang/String;)V", at = @At("HEAD"))
+    public void addFabricDimensions(String world, String string, long l, LevelGeneratorType generatorType, String string2, CallbackInfo ci) {
+        DimensionRegisterCallback.EVENT.invoker().registerDimension(dimensionRegistry);
     }
 }

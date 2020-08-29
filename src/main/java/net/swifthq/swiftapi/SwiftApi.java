@@ -24,29 +24,6 @@ public class SwiftApi implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger("Swift API");
     public static final Gson GSON = createDefaultBuilder().create();
 
-    @Override
-    public void onInitialize() {
-        new SwiftManager();
-
-        //Register callback for player register
-        PlayerJoinCallback.EVENT.register(player -> SwiftManager.getInstance().addPlayer(player));
-        ServerPlayerEvents.DISCONNECT.register((clientConnection, player, minecraftServer) -> SwiftManager.getInstance().removePlayer(player));
-
-        LOGGER.info("Swift API loaded!");
-        LOGGER.info("Running version: " + getVersion());
-    }
-
-    /**
-     * Used internally for debug information
-     *
-     * @return the mods version
-     */
-    public String getVersion() {
-        return FabricLoader.getInstance().getModContainer(MODID)
-                .map(container -> container.getMetadata().getVersion().getFriendlyString())
-                .orElseThrow(() -> new RuntimeException("Failed to grab mod version info"));
-    }
-
     /**
      * Creates a GsonBuilder which has serializers for a variety of Minecraft's data types
      *
@@ -72,5 +49,28 @@ public class SwiftApi implements ModInitializer {
                 .registerTypeHierarchyAdapter(Block.class, new RegistryBasedSerializer<>(Block.REGISTRY))
                 .registerTypeHierarchyAdapter(Item.class, new RegistryBasedSerializer<>(Item.REGISTRY))
                 ;
+    }
+
+    @Override
+    public void onInitialize() {
+        new SwiftManager();
+
+        // Register callback for player register
+        PlayerJoinCallback.EVENT.register(player -> SwiftManager.getInstance().addPlayer(player));
+        ServerPlayerEvents.DISCONNECT.register((clientConnection, player, minecraftServer) -> SwiftManager.getInstance().removePlayer(player));
+
+        LOGGER.info("Swift API loaded!");
+        LOGGER.info("Running version: " + getVersion());
+    }
+
+    /**
+     * Used internally for debug information
+     *
+     * @return the mods version
+     */
+    public String getVersion() {
+        return FabricLoader.getInstance().getModContainer(MODID)
+                .map(container -> container.getMetadata().getVersion().getFriendlyString())
+                .orElseThrow(() -> new RuntimeException("Failed to grab mod version info"));
     }
 }

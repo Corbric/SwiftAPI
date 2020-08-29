@@ -22,15 +22,14 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 
 public interface PlayerJoinCallback {
 
-	/**
-	 * this is currently the best way to be able to cancel the login message. any suggestions are open.
-	 */
-	Event<PlayerJoinCallback> EVENT = EventFactory.createArrayBacked(PlayerJoinCallback.class, (listeners) -> (player) -> {
-		for (PlayerJoinCallback callback : listeners) {
-			callback.playerJoin(player);
-		}
-	});
+    /**
+     * this is currently the best way to be able to cancel the login message. any suggestions are open.
+     */
+    Event<PlayerJoinCallback> EVENT = EventFactory.createArrayBacked(PlayerJoinCallback.class, (listeners) -> (player) -> {
+        for (PlayerJoinCallback callback : listeners) {
+            callback.playerJoin(player);
+        }
+    });
 
-	void playerJoin(ServerPlayerEntity player);
-
+    void playerJoin(ServerPlayerEntity player);
 }

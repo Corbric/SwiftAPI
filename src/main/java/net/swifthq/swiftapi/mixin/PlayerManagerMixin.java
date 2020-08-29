@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin {
 
-    @Inject(at=@At(value = "INVOKE", target = "Lnet/minecraft/entity/player/ServerPlayerEntity;listenToContainer()V", shift = At.Shift.AFTER), method = "onPlayerConnect", locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/ServerPlayerEntity;listenToContainer()V", shift = At.Shift.AFTER), method = "onPlayerConnect", locals = LocalCapture.CAPTURE_FAILHARD)
     public void playerJoinCallback(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci, GameProfile gameProfile, UserCache userCache, String string, CompoundTag compoundTag, String string2, ServerWorld serverWorld) {
         PlayerJoinCallback.EVENT.invoker().playerJoin(player);
     }

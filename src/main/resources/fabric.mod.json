@@ -2,16 +2,13 @@
   "schemaVersion": 1,
   "id": "swiftapi",
   "version": "${version}",
-
   "name": "Swift API",
   "description": "Swift API is for helping develop fabric 1.8.9 serverside mods and helping spigot devs how to use fabric",
   "authors": [
     "hydos"
   ],
-
   "license": "CC0-1.0",
   "icon": "assets/swiftapi/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [

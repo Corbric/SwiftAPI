@@ -22,15 +22,14 @@ import net.swifthq.swiftapi.dimension.DimensionRegistry;
 
 public interface DimensionRegisterCallback {
 
-	/**
-	 * this is currently the best way to be able to cancel the login message. any suggestions are open.
-	 */
-	Event<DimensionRegisterCallback> EVENT = EventFactory.createArrayBacked(DimensionRegisterCallback.class, (listeners) -> (dimensionRegistry) -> {
-		for (DimensionRegisterCallback callback : listeners) {
-			callback.registerDimension(dimensionRegistry);
-		}
-	});
+    /**
+     * this is currently the best way to be able to cancel the login message. any suggestions are open.
+     */
+    Event<DimensionRegisterCallback> EVENT = EventFactory.createArrayBacked(DimensionRegisterCallback.class, (listeners) -> (dimensionRegistry) -> {
+        for (DimensionRegisterCallback callback : listeners) {
+            callback.registerDimension(dimensionRegistry);
+        }
+    });
 
-	void registerDimension(DimensionRegistry dimensionRegistry);
-
+    void registerDimension(DimensionRegistry dimensionRegistry);
 }

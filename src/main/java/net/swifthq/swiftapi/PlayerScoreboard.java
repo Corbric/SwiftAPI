@@ -13,11 +13,11 @@ import net.minecraft.server.MinecraftServer;
 import net.swifthq.swiftapi.player.Player;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 public class PlayerScoreboard extends Scoreboard {
+
     private final MinecraftServer server;
     private final Set<ScoreboardObjective> objectives = Sets.newHashSet();
     private final Player player;
@@ -140,8 +140,8 @@ public class PlayerScoreboard extends Scoreboard {
 
     }
 
-    public List<Packet> createChangePackets(ScoreboardObjective scoreboardObjective) {
-        List<Packet> list = Lists.newArrayList();
+    public List<Packet<?>> createChangePackets(ScoreboardObjective scoreboardObjective) {
+        List<Packet<?>> list = Lists.newArrayList();
         list.add(new ScoreboardObjectiveUpdateS2CPacket(scoreboardObjective, 0));
 
         for (int i = 0; i < 19; ++i) {
@@ -150,10 +150,7 @@ public class PlayerScoreboard extends Scoreboard {
             }
         }
 
-        Iterator iterator = this.getAllPlayerScores(scoreboardObjective).iterator();
-
-        while (iterator.hasNext()) {
-            ScoreboardPlayerScore scoreboardPlayerScore = (ScoreboardPlayerScore) iterator.next();
+        for (ScoreboardPlayerScore scoreboardPlayerScore : this.getAllPlayerScores(scoreboardObjective)) {
             list.add(new ScoreboardPlayerUpdateS2CPacket(scoreboardPlayerScore));
         }
 
@@ -161,15 +158,10 @@ public class PlayerScoreboard extends Scoreboard {
     }
 
     public void addScoreboardObjective(ScoreboardObjective objective) {
-        List<Packet> list = this.createChangePackets(objective);
-        Iterator iterator = this.server.getPlayerManager().getPlayers().iterator();
+        List<Packet<?>> list = this.createChangePackets(objective);
 
-        while (iterator.hasNext()) {
-            ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) iterator.next();
-            Iterator<Packet> iterator2 = list.iterator();
-
-            while (iterator2.hasNext()) {
-                Packet packet = iterator2.next();
+        for (ServerPlayerEntity serverPlayerEntity : this.server.getPlayerManager().getPlayers()) {
+            for (Packet<?> packet : list) {
                 serverPlayerEntity.networkHandler.sendPacket(packet);
             }
         }
@@ -177,8 +169,8 @@ public class PlayerScoreboard extends Scoreboard {
         this.objectives.add(objective);
     }
 
-    public List<Packet> method_5934(ScoreboardObjective scoreboardObjective) {
-        List<Packet> list = Lists.newArrayList();
+    public List<Packet<?>> method_5934(ScoreboardObjective scoreboardObjective) {
+        List<Packet<?>> list = Lists.newArrayList();
         list.add(new ScoreboardObjectiveUpdateS2CPacket(scoreboardObjective, 1));
 
         for (int i = 0; i < 19; ++i) {
@@ -191,14 +183,12 @@ public class PlayerScoreboard extends Scoreboard {
     }
 
     public void removeScoreboardObjective(ScoreboardObjective objective) {
-        List<Packet> list = this.method_5934(objective);
+        List<Packet<?>> list = this.method_5934(objective);
 
-        Iterator<Packet> iterator2 = list.iterator();
-
-        while (iterator2.hasNext()) {
-            Packet packet = iterator2.next();
+        for (Packet<?> packet : list) {
             player.sendPacket(packet);
         }
+
         this.objectives.remove(objective);
     }
 

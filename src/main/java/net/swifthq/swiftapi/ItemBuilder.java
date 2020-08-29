@@ -4,9 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * used to do item building
  */
@@ -14,7 +11,8 @@ public class ItemBuilder {
 
     /**
      * used to apply the builder to an itemstack
-     * @param stack the stack to apply to
+     *
+     * @param stack   the stack to apply to
      * @param builder the builder to apply
      * @return the applied itemstack
      */
@@ -25,7 +23,8 @@ public class ItemBuilder {
 
     /**
      * sets the colour of a string
-     * @param text the text
+     *
+     * @param text  the text
      * @param style the colour/style to set
      * @return the coloured string
      */
@@ -36,6 +35,7 @@ public class ItemBuilder {
 
     /**
      * used to get a builder instance
+     *
      * @return a builder
      */
     public static Builder builder() {
@@ -51,6 +51,7 @@ public class ItemBuilder {
 
         /**
          * sets the name in the builder
+         *
          * @param name the name
          * @return the builder
          */
@@ -62,6 +63,7 @@ public class ItemBuilder {
 
         /**
          * set the colour of the builder
+         *
          * @param formatting the colour
          * @return the builder
          */
@@ -72,6 +74,7 @@ public class ItemBuilder {
 
         /**
          * builds the builder to an itemstack
+         *
          * @param stack the itemstack to build on
          * @return the built itemstack
          */

@@ -5,7 +5,8 @@ import net.minecraft.util.math.BlockPos;
 
 import java.lang.reflect.Type;
 
-public class BlockPosSerializer implements JsonSerializer<BlockPos>, JsonDeserializer<BlockPos>{
+public class BlockPosSerializer implements JsonSerializer<BlockPos>, JsonDeserializer<BlockPos> {
+
     @Override
     public JsonElement serialize(BlockPos src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject object = new JsonObject();

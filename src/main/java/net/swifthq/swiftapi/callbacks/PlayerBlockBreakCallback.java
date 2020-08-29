@@ -25,17 +25,16 @@ import java.util.List;
 
 public interface PlayerBlockBreakCallback {
 
-	/**
-	 * this is currently the best way to be able to cancel the login message. any suggestions are open.
-	 */
-	Event<PlayerBlockBreakCallback> EVENT = EventFactory.createArrayBacked(PlayerBlockBreakCallback.class, (listeners) -> (blockpos) -> {
-		List<Boolean> results = new ArrayList<>();
-		for (PlayerBlockBreakCallback callback : listeners) {
-			results.add(callback.breakBlock(blockpos));
-		}
-		return !results.contains(Boolean.FALSE);
-	});
+    /**
+     * this is currently the best way to be able to cancel the login message. any suggestions are open.
+     */
+    Event<PlayerBlockBreakCallback> EVENT = EventFactory.createArrayBacked(PlayerBlockBreakCallback.class, (listeners) -> (blockpos) -> {
+        List<Boolean> results = new ArrayList<>();
+        for (PlayerBlockBreakCallback callback : listeners) {
+            results.add(callback.breakBlock(blockpos));
+        }
+        return !results.contains(Boolean.FALSE);
+    });
 
-	boolean breakBlock(BlockPos blockPos);
-
+    boolean breakBlock(BlockPos blockPos);
 }

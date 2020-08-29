@@ -1,7 +1,6 @@
 package net.swifthq.swiftapi.gson;
 
 import com.google.gson.*;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 import java.lang.reflect.Type;

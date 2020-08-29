@@ -6,7 +6,7 @@ import net.swifthq.swiftapi.player.inventory.SwiftInventory;
 
 public class Player {
 
-    //TODO: implement a properties system for players so mods can register stuff
+    // TODO: implement a properties system for players so mods can register stuff
 
     public boolean inBattle;
     public ServerPlayerEntity minecraftPlayer;
@@ -19,7 +19,7 @@ public class Player {
         minecraftPlayer.openInventory(inventory);
     }
 
-    public void sendPacket(Packet packet) {
+    public void sendPacket(Packet<?> packet) {
         minecraftPlayer.networkHandler.sendPacket(packet);
     }
 }

@@ -26,17 +26,16 @@ import java.util.List;
 
 public interface PlayerItemInteractCallback {
 
-	/**
-	 * this is currently the best way to be able to cancel the login message. any suggestions are open.
-	 */
-	Event<PlayerItemInteractCallback> EVENT = EventFactory.createArrayBacked(PlayerItemInteractCallback.class, (listeners) -> (player, item) -> {
-		List<Boolean> results = new ArrayList<>();
-		for (PlayerItemInteractCallback callback : listeners) {
-			results.add(callback.interactItem(player, item));
-		}
-		return !results.contains(Boolean.FALSE);
-	});
+    /**
+     * this is currently the best way to be able to cancel the login message. any suggestions are open.
+     */
+    Event<PlayerItemInteractCallback> EVENT = EventFactory.createArrayBacked(PlayerItemInteractCallback.class, (listeners) -> (player, item) -> {
+        List<Boolean> results = new ArrayList<>();
+        for (PlayerItemInteractCallback callback : listeners) {
+            results.add(callback.interactItem(player, item));
+        }
+        return !results.contains(Boolean.FALSE);
+    });
 
-	boolean interactItem(PlayerEntity player, ItemStack item);
-
+    boolean interactItem(PlayerEntity player, ItemStack item);
 }

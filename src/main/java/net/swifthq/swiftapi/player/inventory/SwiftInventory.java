@@ -103,7 +103,8 @@ public abstract class SwiftInventory implements Inventory {
     }
 
     @Override
-    public void clear() {}
+    public void clear() {
+    }
 
     @Override
     public int getProperty(int key) {
