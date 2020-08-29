@@ -13,7 +13,6 @@ public class BlockPosSerializer implements JsonSerializer<BlockPos>, JsonDeseria
         object.add("x", new JsonPrimitive(src.getX()));
         object.add("y", new JsonPrimitive(src.getY()));
         object.add("z", new JsonPrimitive(src.getZ()));
-
         return object;
     }
 
