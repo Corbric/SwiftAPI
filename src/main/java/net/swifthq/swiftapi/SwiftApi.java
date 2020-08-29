@@ -10,7 +10,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.Tag;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.LowercaseEnumTypeAdapterFactory;
 import net.minecraft.util.math.BlockPos;
 import net.swifthq.swiftapi.callbacks.PlayerJoinCallback;
 import net.swifthq.swiftapi.core.SwiftManager;
@@ -35,6 +38,8 @@ public class SwiftApi implements ModInitializer {
      *     <li>{@link BlockState blockstates} via {@link BlockStateSerializer}/li>
      *     <li>{@link Block} via {@link RegistryBasedSerializer} with {@link Block#REGISTRY}/li>
      *     <li>{@link Item} via {@link RegistryBasedSerializer} with {@link Item#REGISTRY}/li>
+     *     <li>{@link Text} via {@link Text.Serializer}</li>
+     *     <li>{@link Style} via {@link Style.Serializer}</li>
      * </ul>
      */
     public static GsonBuilder createDefaultBuilder() {
@@ -48,6 +53,10 @@ public class SwiftApi implements ModInitializer {
                 // Registry based
                 .registerTypeHierarchyAdapter(Block.class, new RegistryBasedSerializer<>(Block.REGISTRY))
                 .registerTypeHierarchyAdapter(Item.class, new RegistryBasedSerializer<>(Item.REGISTRY))
+                // Text (from Text.Serializer)
+                .registerTypeHierarchyAdapter(Text.class, new Text.Serializer())
+                .registerTypeHierarchyAdapter(Style.class, new Style.Serializer())
+                .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
                 ;
     }
 
@@ -68,7 +77,7 @@ public class SwiftApi implements ModInitializer {
      *
      * @return the mods version
      */
-    public String getVersion() {
+    public static String getVersion() {
         return FabricLoader.getInstance().getModContainer(MODID)
                 .map(container -> container.getMetadata().getVersion().getFriendlyString())
                 .orElseThrow(() -> new RuntimeException("Failed to grab mod version info"));
