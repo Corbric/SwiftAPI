@@ -5,16 +5,16 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerPlayerEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.swifthq.swiftapi.callbacks.PlayerJoinCallback;
 import net.swifthq.swiftapi.core.SwiftManager;
-import net.swifthq.swiftapi.gson.BlockPosSerializer;
-import net.swifthq.swiftapi.gson.EnchantmentSerializer;
-import net.swifthq.swiftapi.gson.IdentifierSerializer;
-import net.swifthq.swiftapi.gson.ItemStackSerializer;
+import net.swifthq.swiftapi.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -58,9 +58,14 @@ public class SwiftApi implements ModInitializer {
      */
     public static GsonBuilder createDefaultBuilder() {
         return new GsonBuilder()
+                .setPrettyPrinting()
                 .registerTypeAdapter(BlockPos.class, new BlockPosSerializer())
-                .registerTypeAdapter(Enchantment.class, new EnchantmentSerializer())
                 .registerTypeAdapter(Identifier.class, new IdentifierSerializer())
-                .registerTypeAdapter(ItemStack.class, new ItemStackSerializer());
+                .registerTypeAdapter(ItemStack.class, new ItemStackSerializer())
+                .registerTypeHierarchyAdapter(Tag.class, new TagBasedSerializer())
+                // Registry based
+                .registerTypeAdapter(Block.class, new RegistryBasedSerializer<>(Block.REGISTRY))
+                .registerTypeAdapter(Item.class, new RegistryBasedSerializer<>(Item.REGISTRY))
+                ;
     }
 }

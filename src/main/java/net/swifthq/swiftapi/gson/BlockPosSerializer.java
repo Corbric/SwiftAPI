@@ -18,7 +18,12 @@ public class BlockPosSerializer implements JsonSerializer<BlockPos>, JsonDeseria
 
     @Override
     public BlockPos deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        JsonObject object = json.getAsJsonObject();
-        return new BlockPos(object.get("x").getAsInt(), object.get("y").getAsInt(), object.get("z").getAsInt());
+        if (json.isJsonArray()) {
+            JsonArray array = json.getAsJsonArray();
+            return new BlockPos(array.get(0).getAsInt(), array.get(1).getAsInt(), array.get(2).getAsInt());
+        } else {
+            JsonObject object = json.getAsJsonObject();
+            return new BlockPos(object.get("x").getAsInt(), object.get("y").getAsInt(), object.get("z").getAsInt());
+        }
     }
 }

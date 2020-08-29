@@ -1,8 +1,7 @@
 package net.swifthq.swiftapi.core;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.swifthq.swiftapi.SwiftApi;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -16,9 +15,10 @@ public class ConfigManager {
 
     /**
      * Reads a json file from the disk. Will save the default config if no config exists.
-     * @param name name of the config file
+     *
+     * @param name             name of the config file
      * @param gsonSerialisator what the json will be serialized into
-     * @param <T> the deserializable class
+     * @param <T>              the deserializable class
      * @return the json config as the serializable class
      */
     public static <T> T readGson(String name, Class<T> gsonSerialisator) {
@@ -33,11 +33,7 @@ public class ConfigManager {
         }
         try {
             String text = FileUtils.readFileToString(CONFIG_DIR.resolve(name).toFile(), StandardCharsets.UTF_8);
-            GsonBuilder builder = new GsonBuilder();
-            builder.setPrettyPrinting();
-
-            Gson gson = builder.create();
-            return gson.fromJson(text, gsonSerialisator);
+            return SwiftApi.createDefaultBuilder().create().fromJson(text, gsonSerialisator);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -45,23 +41,18 @@ public class ConfigManager {
     }
 
     /**
-     *
-     * @param name the name of the file to write to
+     * @param name               the name of the file to write to
      * @param serializationClass the class to be serialized to
-     * @param <T> the serializable class
+     * @param <T>                the serializable class
      */
     public static <T> void writeGson(String name, T serializationClass) {
         try {
             CONFIG_DIR.toFile().mkdirs();
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
             FileWriter writer = new FileWriter(CONFIG_DIR.resolve(name).toFile());
-            writer.write(gson.toJson(serializationClass));
+            writer.write(SwiftApi.createDefaultBuilder().create().toJson(serializationClass));
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 }
