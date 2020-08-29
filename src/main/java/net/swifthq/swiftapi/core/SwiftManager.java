@@ -1,6 +1,7 @@
 package net.swifthq.swiftapi.core;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.swifthq.swiftapi.chat.ChatManager;
 import net.swifthq.swiftapi.player.Player;
 
 import java.util.HashMap;
@@ -14,6 +15,7 @@ public class SwiftManager {
 
     public SwiftManager() {
         INSTANCE = this;
+        new ChatManager();
     }
 
     public static SwiftManager getInstance() {

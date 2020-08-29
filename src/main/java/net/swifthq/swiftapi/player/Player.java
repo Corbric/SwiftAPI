@@ -10,6 +10,7 @@ public class Player {
 
     public boolean inBattle;
     public ServerPlayerEntity minecraftPlayer;
+    private String displayName;
 
     public Player(ServerPlayerEntity minecraftPlayer) {
         this.minecraftPlayer = minecraftPlayer;
@@ -21,5 +22,9 @@ public class Player {
 
     public void sendPacket(Packet<?> packet) {
         minecraftPlayer.networkHandler.sendPacket(packet);
+    }
+
+    public String getDisplayName() {
+        return displayName == null ? minecraftPlayer.getName().asString() : displayName;
     }
 }
