@@ -5,7 +5,6 @@ import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.swifthq.swiftapi.callbacks.ClickContainerCallback;
 import net.swifthq.swiftapi.chat.ChatManager;
@@ -23,11 +22,15 @@ public abstract class ServerPlayerNetworkHandlerMixin {
     @Shadow
     public ServerPlayerEntity player;
 
-    @Shadow @Final private MinecraftServer server;
+    @Shadow
+    @Final
+    private MinecraftServer server;
 
-    @Shadow private int messageCooldown;
+    @Shadow
+    private int messageCooldown;
 
-    @Shadow public abstract void disconnect(String reason);
+    @Shadow
+    public abstract void disconnect(String reason);
 
     @Inject(method = "onClickWindow", at = @At("HEAD"), cancellable = true)
     public void clickWindow(ClickWindowC2SPacket packet, CallbackInfo ci) {
@@ -37,7 +40,7 @@ public abstract class ServerPlayerNetworkHandlerMixin {
     }
 
     @Inject(method = "onChatMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/PlayerManager;broadcastChatMessage(Lnet/minecraft/text/Text;Z)V"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
-    public void handleChat(ChatMessageC2SPacket packet, CallbackInfo ci, String string, Text text){
+    public void handleChat(ChatMessageC2SPacket packet, CallbackInfo ci, String string, Text text) {
         ci.cancel();
         this.server.getPlayerManager().broadcastChatMessage(ChatManager.getInstance().handleChat(string, player), false);
 

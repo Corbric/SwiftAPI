@@ -60,6 +60,17 @@ public class SwiftApi implements ModInitializer {
                 ;
     }
 
+    /**
+     * Used internally for debug information
+     *
+     * @return the mods version
+     */
+    public static String getVersion() {
+        return FabricLoader.getInstance().getModContainer(MODID)
+                .map(container -> container.getMetadata().getVersion().getFriendlyString())
+                .orElseThrow(() -> new RuntimeException("Failed to grab mod version info"));
+    }
+
     @Override
     public void onInitialize() {
         new SwiftManager();
@@ -70,16 +81,5 @@ public class SwiftApi implements ModInitializer {
 
         LOGGER.info("Swift API loaded!");
         LOGGER.info("Running version: " + getVersion());
-    }
-
-    /**
-     * Used internally for debug information
-     *
-     * @return the mods version
-     */
-    public static String getVersion() {
-        return FabricLoader.getInstance().getModContainer(MODID)
-                .map(container -> container.getMetadata().getVersion().getFriendlyString())
-                .orElseThrow(() -> new RuntimeException("Failed to grab mod version info"));
     }
 }
