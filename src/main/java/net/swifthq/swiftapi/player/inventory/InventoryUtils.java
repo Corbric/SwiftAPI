@@ -17,4 +17,13 @@ public class InventoryUtils {
         player.networkHandler.sendPacket(new ContainerSlotUpdateS2CPacket(player.openContainer.syncId, packet.getSlot(), player.openContainer.getSlot(packet.getSlot()).getStack()));
     }
 
+    /**
+     * forces a player out of an {@link SwiftInventory}
+     * @param player the player to force out
+     */
+    public static void closeInventory(ServerPlayerEntity player){
+        player.closeContainer();
+        player.closeContainerScreen();
+    }
+
 }
