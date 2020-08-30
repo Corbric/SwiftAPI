@@ -1,8 +1,10 @@
-package net.swifthq.swiftapi.sw;
+package net.swifthq.swiftapi.player;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Packet;
 import net.minecraft.util.Identifier;
+import net.swifthq.swiftapi.player.inventory.SwiftInventory;
 
 public interface SwPlayer {
 
@@ -42,4 +44,16 @@ public interface SwPlayer {
      * @return The data container
      */
     CompoundTag getOrCreatePersistentContainer(Identifier identifier);
+
+    /**
+     * Shows a inventory to the player
+     * @param inventory the inventory to show to the player
+     */
+    void showInventory(SwiftInventory inventory);
+
+    /**
+     * Sends a packet to a player.
+     * @param packet the packet to send to the player
+     */
+    void sendPacket(Packet<?> packet);
 }

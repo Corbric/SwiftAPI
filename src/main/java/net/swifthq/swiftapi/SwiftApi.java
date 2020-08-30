@@ -3,7 +3,6 @@ package net.swifthq.swiftapi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerPlayerEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,8 +14,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.LowercaseEnumTypeAdapterFactory;
 import net.minecraft.util.math.BlockPos;
-import net.swifthq.swiftapi.callbacks.PlayerJoinCallback;
-import net.swifthq.swiftapi.core.SwiftManager;
 import net.swifthq.swiftapi.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -73,12 +70,6 @@ public class SwiftApi implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        new SwiftManager();
-
-        // Register callback for player register
-        PlayerJoinCallback.EVENT.register(player -> SwiftManager.getInstance().addPlayer(player));
-        ServerPlayerEvents.DISCONNECT.register((clientConnection, player, minecraftServer) -> SwiftManager.getInstance().removePlayer(player));
-
         LOGGER.info("Swift API loaded!");
         LOGGER.info("Running version: " + getVersion());
     }

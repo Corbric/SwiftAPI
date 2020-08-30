@@ -10,7 +10,7 @@ import net.minecraft.network.packet.s2c.play.ScoreboardPlayerUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.TeamS2CPacket;
 import net.minecraft.scoreboard.*;
 import net.minecraft.server.MinecraftServer;
-import net.swifthq.swiftapi.player.Player;
+import net.swifthq.swiftapi.player.SwPlayer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,10 +20,10 @@ public class PlayerScoreboard extends Scoreboard {
 
     private final MinecraftServer server;
     private final Set<ScoreboardObjective> objectives = Sets.newHashSet();
-    private final Player player;
+    private final ServerPlayerEntity player;
     private ScoreboardState state;
 
-    public PlayerScoreboard(MinecraftServer server, Player player) {
+    public PlayerScoreboard(MinecraftServer server, ServerPlayerEntity player) {
         this.server = server;
         this.player = player;
     }
@@ -186,7 +186,7 @@ public class PlayerScoreboard extends Scoreboard {
         List<Packet<?>> list = this.method_5934(objective);
 
         for (Packet<?> packet : list) {
-            player.sendPacket(packet);
+            SwPlayer.from(player).sendPacket(packet);
         }
 
         this.objectives.remove(objective);

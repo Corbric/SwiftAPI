@@ -3,7 +3,6 @@ package net.swifthq.swiftapi.chat;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.swifthq.swiftapi.core.SwiftManager;
 
 public class ChatManager {
 
@@ -24,6 +23,6 @@ public class ChatManager {
     }
 
     public Text handleChat(String text, ServerPlayerEntity player) {
-        return new LiteralText(chatHandler.onChatMessage(text, SwiftManager.getInstance().playerMap.get(player)));
+        return new LiteralText(chatHandler.onChatMessage(text, player));
     }
 }

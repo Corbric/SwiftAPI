@@ -1,4 +1,4 @@
-package net.swifthq.swiftapi.core;
+package net.swifthq.swiftapi.config;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.swifthq.swiftapi.SwiftApi;

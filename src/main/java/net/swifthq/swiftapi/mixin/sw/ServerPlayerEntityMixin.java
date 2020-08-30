@@ -1,11 +1,16 @@
 package net.swifthq.swiftapi.mixin.sw;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.Packet;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.util.Identifier;
-import net.swifthq.swiftapi.sw.SwPlayer;
+import net.swifthq.swiftapi.player.SwPlayer;
+import net.swifthq.swiftapi.player.inventory.SwiftInventory;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -14,8 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(ServerPlayerEntity.class)
-public class ServerPlayerEntityMixin implements SwPlayer {
+public abstract class ServerPlayerEntityMixin implements SwPlayer {
 
+    @Shadow public abstract void openInventory(Inventory inventory);
+
+    @Shadow public ServerPlayNetworkHandler networkHandler;
     private final Map<Identifier, Object> nonPersistentData = new HashMap<>();
     private final Map<Identifier, CompoundTag> persistentData = new HashMap<>();
 
@@ -37,6 +45,16 @@ public class ServerPlayerEntityMixin implements SwPlayer {
     @Override
     public CompoundTag getOrCreatePersistentContainer(Identifier identifier) {
         return persistentData.computeIfAbsent(identifier, $ -> new CompoundTag());
+    }
+
+    @Override
+    public void showInventory(SwiftInventory inventory) {
+        openInventory(inventory);
+    }
+
+    @Override
+    public void sendPacket(Packet<?> packet) {
+        networkHandler.sendPacket(packet);
     }
 
     @Inject(method = "serialize", at = @At("RETURN"))
