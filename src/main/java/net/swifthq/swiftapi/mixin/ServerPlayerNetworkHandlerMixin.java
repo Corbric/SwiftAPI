@@ -6,7 +6,7 @@ import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.text.Text;
-import net.swifthq.swiftapi.callbacks.ClickContainerCallback;
+import net.swifthq.swiftapi.callbacks.container.ClickContainerCallback;
 import net.swifthq.swiftapi.chat.ChatManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
