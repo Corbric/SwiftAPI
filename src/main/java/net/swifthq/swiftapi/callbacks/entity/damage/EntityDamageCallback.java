@@ -9,14 +9,14 @@ import net.minecraft.entity.damage.DamageSource;
 
 public interface EntityDamageCallback {
 
-    Event<EntityDamageCallback> EVENT = EventFactory.createArrayBacked(EntityDamageCallback.class, (listeners) -> (entity, damageSource, originalHealth, damage, attacker) -> {
+    Event<EntityDamageCallback> EVENT = EventFactory.createArrayBacked(EntityDamageCallback.class, (listeners) -> (entity, damageSource, damage, attacker) -> {
         for (EntityDamageCallback callback : listeners) {
-            if(callback.onEntityDamageEntity(entity, damageSource, originalHealth, damage, attacker) == ActionResult.FAIL){
+            if(callback.onEntityDamageEntity(entity, damageSource, damage, attacker) == ActionResult.FAIL){
                 return ActionResult.FAIL;
             }
         }
         return ActionResult.SUCCESS;
     });
 
-    ActionResult onEntityDamageEntity(LivingEntity entity, DamageSource damageSource, float originalHealth, float damage, Entity attacker);
+    ActionResult onEntityDamageEntity(LivingEntity entity, DamageSource damageSource, float damage, Entity attacker);
 }

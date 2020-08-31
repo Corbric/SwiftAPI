@@ -17,22 +17,4 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(DamageTracker.class)
 public class DamageTrackerMixin {
 
-    @Shadow @Final private LivingEntity entity;
-
-    @Inject(at = @At("HEAD"), method = "onDamage", cancellable = true)
-    public void onDamage(DamageSource damageSource, float originalHealth, float damage, CallbackInfo info) {
-        if(this.entity instanceof ServerPlayerEntity){
-            ActionResult result = PlayerDamageCallback.EVENT.invoker().onPlayerDamage((ServerPlayerEntity) this.entity, damageSource, originalHealth, damage);
-            if(result == ActionResult.FAIL){
-                info.cancel();
-                return;
-            }
-        }
-        if(damageSource.getAttacker() != null){
-            ActionResult result = EntityDamageCallback.EVENT.invoker().onEntityDamageEntity(this.entity, damageSource, originalHealth, damage, damageSource.getAttacker());
-            if(result == ActionResult.FAIL){
-                info.cancel();
-            }
-        }
-    }
 }

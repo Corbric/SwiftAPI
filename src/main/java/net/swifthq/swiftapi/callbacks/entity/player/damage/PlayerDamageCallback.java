@@ -10,14 +10,14 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 
 public interface PlayerDamageCallback {
 
-    Event<PlayerDamageCallback> EVENT = EventFactory.createArrayBacked(PlayerDamageCallback.class, (listeners) -> (entity, damageSource, originalHealth, damage) -> {
+    Event<PlayerDamageCallback> EVENT = EventFactory.createArrayBacked(PlayerDamageCallback.class, (listeners) -> (entity, damageSource, damage) -> {
         for (PlayerDamageCallback callback : listeners) {
-            if (callback.onPlayerDamage(entity, damageSource, originalHealth, damage) == ActionResult.FAIL) {
+            if (callback.onPlayerDamage(entity, damageSource, damage) == ActionResult.FAIL) {
                 return ActionResult.FAIL;
             }
         }
         return ActionResult.SUCCESS;
     });
 
-    ActionResult onPlayerDamage(ServerPlayerEntity entity, DamageSource damageSource, float originalHealth, float damage);
+    ActionResult onPlayerDamage(ServerPlayerEntity entity, DamageSource damageSource, float damage);
 }

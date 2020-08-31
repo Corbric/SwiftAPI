@@ -12,6 +12,7 @@
     "callback.DamageTrackerMixin",
     "callback.DedicatedServerMixin",
     "callback.HungerManagerMixin",
+    "callback.LivingEntityMixin",
     "callback.ServerPlayerEntityMixin"
   ],
   "injectors": {
