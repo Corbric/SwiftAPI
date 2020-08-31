@@ -22,7 +22,7 @@ public class DamageTrackerMixin {
     @Inject(at = @At("HEAD"), method = "onDamage", cancellable = true)
     public void onDamage(DamageSource damageSource, float originalHealth, float damage, CallbackInfo info) {
         if(this.entity instanceof ServerPlayerEntity){
-            ActionResult result = PlayerDamageCallback.EVENT.invoker().onPlayerDamage(this.entity, damageSource, originalHealth, damage);
+            ActionResult result = PlayerDamageCallback.EVENT.invoker().onPlayerDamage((ServerPlayerEntity) this.entity, damageSource, originalHealth, damage);
             if(result == ActionResult.FAIL){
                 info.cancel();
             }
