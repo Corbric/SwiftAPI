@@ -4,7 +4,9 @@ import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTracker;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.swifthq.swiftapi.callbacks.entity.damage.EntityDamageCallback;
+import net.swifthq.swiftapi.callbacks.entity.player.damage.PlayerDamageCallback;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,9 +21,17 @@ public class DamageTrackerMixin {
 
     @Inject(at = @At("HEAD"), method = "onDamage", cancellable = true)
     public void onDamage(DamageSource damageSource, float originalHealth, float damage, CallbackInfo info) {
-        ActionResult result = EntityDamageCallback.EVENT.invoker().onEntityDamageEntity(this.entity, damageSource, originalHealth, damage, damageSource.getAttacker());
-        if(result == ActionResult.FAIL){
-            info.cancel();
+        if(this.entity instanceof ServerPlayerEntity){
+            ActionResult result = PlayerDamageCallback.EVENT.invoker().onPlayerDamage(this.entity, damageSource, originalHealth, damage);
+            if(result == ActionResult.FAIL){
+                info.cancel();
+            }
+        }
+        if(damageSource.getAttacker() != null){
+            ActionResult result = EntityDamageCallback.EVENT.invoker().onEntityDamageEntity(this.entity, damageSource, originalHealth, damage, damageSource.getAttacker());
+            if(result == ActionResult.FAIL){
+                info.cancel();
+            }
         }
     }
 }

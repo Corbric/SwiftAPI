@@ -6,17 +6,18 @@ import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.ServerPlayerEntity;
 
 public interface PlayerDamageCallback {
 
-    Event<PlayerDamageCallback> EVENT = EventFactory.createArrayBacked(PlayerDamageCallback.class, (listeners) -> (entity, damageSource, originalHealth, damage, attacker) -> {
+    Event<PlayerDamageCallback> EVENT = EventFactory.createArrayBacked(PlayerDamageCallback.class, (listeners) -> (entity, damageSource, originalHealth, damage) -> {
         for (PlayerDamageCallback callback : listeners) {
-            if (callback.onPlayerDamageEntity(entity, damageSource, originalHealth, damage, attacker) == ActionResult.FAIL) {
+            if (callback.onPlayerDamage(entity, damageSource, originalHealth, damage) == ActionResult.FAIL) {
                 return ActionResult.FAIL;
             }
         }
         return ActionResult.SUCCESS;
     });
 
-    ActionResult onPlayerDamageEntity(LivingEntity entity, DamageSource damageSource, float originalHealth, float damage, Entity attacker);
+    ActionResult onPlayerDamage(ServerPlayerEntity entity, DamageSource damageSource, float originalHealth, float damage);
 }
