@@ -8,7 +8,9 @@
     "PlayerManagerMixin",
     "ServerPlayerInteractionManagerMixin",
     "ServerPlayerNetworkHandlerMixin",
-    "sw.ServerPlayerEntityMixin"
+    "abstraction.ServerPlayerEntityMixin",
+    "callback.DamageTrackerMixin",
+    "callback.ServerPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

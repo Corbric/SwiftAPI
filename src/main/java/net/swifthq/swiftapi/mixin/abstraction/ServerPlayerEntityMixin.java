@@ -1,4 +1,4 @@
-package net.swifthq.swiftapi.mixin.sw;
+package net.swifthq.swiftapi.mixin.abstraction;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;

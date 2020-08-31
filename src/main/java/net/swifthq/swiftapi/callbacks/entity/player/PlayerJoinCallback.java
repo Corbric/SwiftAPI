@@ -1,4 +1,4 @@
-package net.swifthq.swiftapi.callbacks.player;
+package net.swifthq.swiftapi.callbacks.entity.player;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;

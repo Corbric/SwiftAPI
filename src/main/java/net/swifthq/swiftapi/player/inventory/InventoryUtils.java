@@ -1,9 +1,11 @@
 package net.swifthq.swiftapi.player.inventory;
 
+import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
 import net.minecraft.network.packet.s2c.play.ContainerSlotUpdateS2CPacket;
 import net.swifthq.swiftapi.callbacks.container.ClickContainerCallback;
+import net.swifthq.swiftapi.callbacks.inventory.InventoryCloseCallback;
 
 public class InventoryUtils {
 
@@ -23,6 +25,7 @@ public class InventoryUtils {
      * @param player the player to force out
      */
     public static void closeInventory(ServerPlayerEntity player){
+        if(InventoryCloseCallback.EVENT.invoker().onCloseInventory(player) == ActionResult.FAIL) return;
         player.closeContainer();
         player.closeContainerScreen();
     }
