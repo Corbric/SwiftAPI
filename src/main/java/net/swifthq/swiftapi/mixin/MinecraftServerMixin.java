@@ -8,7 +8,7 @@ import net.minecraft.world.SaveHandler;
 import net.minecraft.world.level.LevelGeneratorType;
 import net.minecraft.world.level.LevelInfo;
 import net.minecraft.world.level.LevelProperties;
-import net.swifthq.swiftapi.callbacks.DimensionRegisterCallback;
+import net.swifthq.swiftapi.callbacks.dimension.DimensionRegisterCallback;
 import net.swifthq.swiftapi.dimension.DimensionRegistry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

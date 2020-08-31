@@ -1,4 +1,4 @@
-package net.swifthq.swiftapi.callbacks.entity.player;
+package net.swifthq.swiftapi.callbacks.entity.player.damage;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -6,7 +6,6 @@ import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.ServerPlayerEntity;
 
 public interface PlayerDamageCallback {
 
@@ -20,6 +19,4 @@ public interface PlayerDamageCallback {
     });
 
     ActionResult onPlayerDamageEntity(LivingEntity entity, DamageSource damageSource, float originalHealth, float damage, Entity attacker);
-
-    ActionResult onPlayerDamagePlayer(ServerPlayerEntity entity, DamageSource damageSource, float originalHealth, float damage, ServerPlayerEntity attacker);
 }

@@ -10,6 +10,8 @@
     "ServerPlayerNetworkHandlerMixin",
     "abstraction.ServerPlayerEntityMixin",
     "callback.DamageTrackerMixin",
+    "callback.DedicatedServerMixin",
+    "callback.HungerManagerMixin",
     "callback.ServerPlayerEntityMixin"
   ],
   "injectors": {

@@ -1,5 +1,6 @@
 package net.swifthq.swiftapi.mixin;
 
+import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.level.LevelInfo;
-import net.swifthq.swiftapi.callbacks.entity.player.PlayerBlockBreakCallback;
+import net.swifthq.swiftapi.callbacks.entity.player.block.PlayerBlockBreakCallback;
 import net.swifthq.swiftapi.callbacks.entity.player.PlayerItemInteractCallback;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +32,7 @@ public class ServerPlayerInteractionManagerMixin {
         if (this.gameMode.isCreative() && this.player.method_7107() != null && this.player.method_7107().getItem() instanceof SwordItem) {
             cir.setReturnValue(true);
         } else {
-            cir.setReturnValue(PlayerBlockBreakCallback.EVENT.invoker().breakBlock(blockPos));
+            cir.setReturnValue(PlayerBlockBreakCallback.EVENT.invoker().breakBlock(blockPos) == ActionResult.FAIL);
         }
     }
 

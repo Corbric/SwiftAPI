@@ -1,4 +1,4 @@
-package net.swifthq.swiftapi.callbacks.entity;
+package net.swifthq.swiftapi.callbacks.entity.damage;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -6,7 +6,6 @@ import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.swifthq.swiftapi.dimension.DimensionRegistry;
 
 public interface EntityDamageCallback {
 

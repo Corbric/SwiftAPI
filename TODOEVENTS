@@ -1,13 +1,5 @@
-plr attack
-block break
 block place
-sign change
 projectile hit event
-death event
 entity death
-pickup item
-saturation event
-spawn event
+player spawn event
 gain health event
-world ready
-world close

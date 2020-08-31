@@ -1,4 +1,4 @@
-package net.swifthq.swiftapi.callbacks;
+package net.swifthq.swiftapi.callbacks.dimension;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;

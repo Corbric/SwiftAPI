@@ -1,11 +1,9 @@
-package net.swifthq.swiftapi.callbacks.entity.player;
+package net.swifthq.swiftapi.callbacks.entity.player.block;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
+import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public interface PlayerBlockBreakCallback {
 
@@ -13,12 +11,13 @@ public interface PlayerBlockBreakCallback {
      * This is currently the best way to be able to cancel the login message. any suggestions are open.
      */
     Event<PlayerBlockBreakCallback> EVENT = EventFactory.createArrayBacked(PlayerBlockBreakCallback.class, (listeners) -> (blockpos) -> {
-        List<Boolean> results = new ArrayList<>();
         for (PlayerBlockBreakCallback callback : listeners) {
-            results.add(callback.breakBlock(blockpos));
+            if(callback.breakBlock(blockpos) == ActionResult.FAIL){
+                return ActionResult.FAIL;
+            }
         }
-        return !results.contains(Boolean.FALSE);
+        return ActionResult.SUCCESS;
     });
 
-    boolean breakBlock(BlockPos blockPos);
+    ActionResult breakBlock(BlockPos blockPos);
 }
