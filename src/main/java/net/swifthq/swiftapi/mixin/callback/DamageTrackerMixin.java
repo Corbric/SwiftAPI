@@ -25,6 +25,7 @@ public class DamageTrackerMixin {
             ActionResult result = PlayerDamageCallback.EVENT.invoker().onPlayerDamage((ServerPlayerEntity) this.entity, damageSource, originalHealth, damage);
             if(result == ActionResult.FAIL){
                 info.cancel();
+                return;
             }
         }
         if(damageSource.getAttacker() != null){
