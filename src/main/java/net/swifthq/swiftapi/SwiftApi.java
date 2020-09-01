@@ -14,6 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.LowercaseEnumTypeAdapterFactory;
 import net.minecraft.util.math.BlockPos;
+import net.swifthq.swiftapi.chat.ChatManager;
 import net.swifthq.swiftapi.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -70,6 +71,8 @@ public class SwiftApi implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        new ChatManager();
+
         LOGGER.info("Swift API loaded!");
         LOGGER.info("Running version: " + getVersion());
     }
