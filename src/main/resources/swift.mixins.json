@@ -4,6 +4,9 @@
   "package": "net.swifthq.swiftapi.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BlockPatternResultMixin",
+    "BlockPosMixin",
+    "DimensionMixin",
     "MinecraftServerMixin",
     "PlayerManagerMixin",
     "ServerPlayerInteractionManagerMixin",
