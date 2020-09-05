@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.level.LevelInfo;
 import net.swifthq.swiftapi.callbacks.entity.player.block.PlayerBlockBreakCallback;
 import net.swifthq.swiftapi.callbacks.entity.player.PlayerItemInteractCallback;
+import net.swifthq.swiftapi.callbacks.world.BlockBreakCallback;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,7 +33,9 @@ public class ServerPlayerInteractionManagerMixin {
         if (this.gameMode.isCreative() && this.player.method_7107() != null && this.player.method_7107().getItem() instanceof SwordItem) {
             cir.setReturnValue(true);
         } else {
-            cir.setReturnValue(PlayerBlockBreakCallback.EVENT.invoker().breakBlock(blockPos) == ActionResult.FAIL);
+            if(BlockBreakCallback.EVENT.invoker().onBlockBroken(player, blockPos) == ActionResult.FAIL){
+                cir.setReturnValue(false);
+            }
         }
     }
 
