@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class ConfigManager {
 
-    private static final Path CONFIG_DIR = FabricLoader.getInstance().getConfigDirectory().toPath().resolve("config");
+    private static final Path CONFIG_DIR = FabricLoader.getInstance().getConfigDirectory().toPath();
 
     /**
      * Writes a serializable data class to the standard configuration directory
