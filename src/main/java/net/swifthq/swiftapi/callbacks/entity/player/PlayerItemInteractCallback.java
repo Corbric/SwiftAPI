@@ -2,6 +2,7 @@ package net.swifthq.swiftapi.callbacks.entity.player;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
+import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
@@ -14,12 +15,13 @@ public interface PlayerItemInteractCallback {
      * This is currently the best way to be able to cancel the login message. any suggestions are open.
      */
     Event<PlayerItemInteractCallback> EVENT = EventFactory.createArrayBacked(PlayerItemInteractCallback.class, (listeners) -> (player, item) -> {
-        List<Boolean> results = new ArrayList<>();
         for (PlayerItemInteractCallback callback : listeners) {
-            results.add(callback.interactItem(player, item));
+            if(callback.interactItem(player, item) == ActionResult.FAIL){
+                return ActionResult.FAIL;
+            }
         }
-        return !results.contains(Boolean.FALSE);
+        return ActionResult.SUCCESS;
     });
 
-    boolean interactItem(PlayerEntity player, ItemStack item);
+    ActionResult interactItem(PlayerEntity player, ItemStack item);
 }
