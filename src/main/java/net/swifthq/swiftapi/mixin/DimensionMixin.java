@@ -9,10 +9,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Dimension.class)
 public class DimensionMixin {
-
     @Inject(method = "getById", at = @At("HEAD"), cancellable = true)
     private static void getDimensionByDimId(int id, CallbackInfoReturnable<Dimension> cir) {
         if (id > 2) {
+            //TODO: make a registry for dimensions
             cir.setReturnValue(new OverworldDimension());
         }
     }

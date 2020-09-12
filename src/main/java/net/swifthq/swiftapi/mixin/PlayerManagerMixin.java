@@ -80,7 +80,7 @@ public abstract class PlayerManagerMixin {
         if (i > 2) {
             return world.getSpawnPos();
         }
-        return world.getForcedSpawnPoint();
+        return new BlockPos(0, 60, 0);
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/ServerPlayerEntity;listenToContainer()V", shift = At.Shift.AFTER), method = "onPlayerConnect", locals = LocalCapture.CAPTURE_FAILHARD)
