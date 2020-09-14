@@ -14,6 +14,10 @@ repositories {
     mavenCentral()
     jcenter()
     maven {
+        name = "Spigot"
+        url = "https://hub.spigotmc.org/nexus/content/groups/public/"
+    }
+    maven {
         name = 'Fabric'
         url = 'http://maven.fabricmc.net/'
     }
@@ -39,6 +43,8 @@ dependencies {
     modCompile("net.fabricmc:fabric-loader-1.8.9:${project.loader_version}") {
         exclude module: "guava"
     }
+    implementation("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
+    include("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
 }
 
 processResources {

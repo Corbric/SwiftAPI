@@ -16,8 +16,10 @@ import net.minecraft.util.LowercaseEnumTypeAdapterFactory;
 import net.minecraft.util.math.BlockPos;
 import net.swifthq.swiftapi.chat.ChatManager;
 import net.swifthq.swiftapi.gson.*;
+import net.swifthq.swukkit.SwukkitServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bukkit.Bukkit;
 
 public class SwiftApi implements ModInitializer {
 
@@ -72,7 +74,6 @@ public class SwiftApi implements ModInitializer {
     @Override
     public void onInitialize() {
         new ChatManager();
-
         LOGGER.info("Swift API loaded!");
         LOGGER.info("Running version: " + getVersion());
     }

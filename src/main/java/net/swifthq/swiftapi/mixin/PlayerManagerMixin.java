@@ -14,6 +14,8 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.UserCache;
 import net.minecraft.util.math.BlockPos;
 import net.swifthq.swiftapi.callbacks.entity.player.PlayerJoinCallback;
+import net.swifthq.swukkit.SwukkitServer;
+import org.bukkit.Bukkit;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -43,6 +45,11 @@ public abstract class PlayerManagerMixin {
     @Shadow
     public abstract void method_6230(ServerPlayerEntity player);
 
+    @Inject(method = "<init>", at = @At("TAIL"))
+    public void init(MinecraftServer server, CallbackInfo ci){
+        Bukkit.setServer(new SwukkitServer());
+    }
+
     /**
      * @author hydos
      * @reason because serverside dimensions
@@ -53,14 +60,9 @@ public abstract class PlayerManagerMixin {
         ServerWorld serverWorld = this.server.getWorld(player.dimension);
         player.dimension = i;
         ServerWorld serverWorld2;
-        if (i > 2) {
-            serverWorld2 = this.server.worlds[i];
-        } else {
-            serverWorld2 = server.getWorld(i);
-        }
-        player.networkHandler.sendPacket(new PlayerRespawnS2CPacket(0, serverWorld.getGlobalDifficulty(), serverWorld.getGeneratorType(), player.interactionManager.getGameMode()));
-
-        player.networkHandler.sendPacket(new PlayerRespawnS2CPacket(player.dimension, player.world.getGlobalDifficulty(), player.world.getLevelProperties().getGeneratorType(), player.interactionManager.getGameMode()));
+        serverWorld2 = server.getWorld(i);
+        player.networkHandler.sendPacket(new PlayerRespawnS2CPacket(0, serverWorld.getGlobalDifficulty(), serverWorld.levelProperties.getGeneratorType(), player.interactionManager.getGameMode()));
+        player.networkHandler.sendPacket(new PlayerRespawnS2CPacket(player.dimension, player.world.getGlobalDifficulty(), player.world.levelProperties.getGeneratorType(), player.interactionManager.getGameMode()));
         serverWorld.method_404(player);
         player.removed = false;
         this.method_6206(player, oldPlayerDimension, serverWorld, serverWorld2);
