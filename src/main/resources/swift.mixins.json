@@ -6,6 +6,8 @@
   "mixins": [
     "BlockPatternResultMixin",
     "BlockPosMixin",
+    "DedicatedPlayerManagerMixin",
+    "DedicatedServerMixin",
     "DimensionMixin",
     "MinecraftServerMixin",
     "PlayerManagerMixin",

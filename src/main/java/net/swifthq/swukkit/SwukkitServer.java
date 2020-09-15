@@ -48,7 +48,7 @@ public class SwukkitServer implements Server {
         this.server = (DedicatedServer) DedicatedServer.getServer();
         this.scheduler = new SwukkitScheduler(this);
         this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
-        this.playerView = Collections.unmodifiableList(Lists.transform(server.getPlayerManager().getPlayers(), SwPlayer::from));
+//        this.playerView = Collections.unmodifiableList(Lists.transform(server.getPlayerManager().getPlayers(), SwPlayer::from));
     }
 
     public void loadPlugins() {
