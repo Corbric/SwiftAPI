@@ -1,9 +1,11 @@
 package net.swifthq.swukkit;
 
 import com.avaje.ebean.config.ServerConfig;
+import com.google.common.collect.Lists;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.text.LiteralText;
 import net.swifthq.swiftapi.SwiftApi;
+import net.swifthq.swiftapi.player.SwPlayer;
 import net.swifthq.swukkit.schedule.SwukkitScheduler;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -17,6 +19,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.SimplePluginManager;
+import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
@@ -25,6 +28,7 @@ import org.bukkit.util.CachedServerIcon;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SwukkitServer implements Server {
@@ -35,13 +39,37 @@ public class SwukkitServer implements Server {
     public DedicatedServer server;
 
     private final Logger logger = Logger.getLogger("Swukkit");
-    private BukkitScheduler scheduler;
-    private PluginManager pluginManager;
+    private final BukkitScheduler scheduler;
+    private final PluginManager pluginManager;
+
+    List<SwPlayer> playerView;
 
     public SwukkitServer() {
         this.server = (DedicatedServer) DedicatedServer.getServer();
         this.scheduler = new SwukkitScheduler(this);
         this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
+        this.playerView = Collections.unmodifiableList(Lists.transform(server.getPlayerManager().getPlayers(), SwPlayer::from));
+    }
+
+    public void loadPlugins() {
+        pluginManager.registerInterface(JavaPluginLoader.class);
+
+        File pluginFolder = new File(server.gameDir, "plugins");
+
+        if (pluginFolder.exists()) {
+            Plugin[] plugins = pluginManager.loadPlugins(pluginFolder);
+            for (Plugin plugin : plugins) {
+                try {
+                    String message = "Loading Bukkit plugin " + plugin.getDescription().getFullName();
+                    plugin.getLogger().info(message);
+                    plugin.onLoad();
+                } catch (Throwable ex) {
+                    SwiftApi.LOGGER.error(ex.getMessage() + " initializing " + plugin.getDescription().getFullName() + " (Get better plugins lmao)", ex);
+                }
+            }
+        } else {
+            pluginFolder.mkdir();
+        }
     }
 
     @Override
@@ -147,7 +175,7 @@ public class SwukkitServer implements Server {
 
     @Override
     public String getUpdateFolder() {
-        return null;
+        return server.getPropertiesFilePath();
     }
 
     @Override
@@ -172,22 +200,22 @@ public class SwukkitServer implements Server {
 
     @Override
     public Player getPlayer(String name) {
-        return null;
+        return SwPlayer.from(server.getPlayerManager().getPlayer(name));
     }
 
     @Override
     public Player getPlayerExact(String name) {
-        return null;
+        return getPlayer(name);
     }
 
     @Override
     public List<Player> matchPlayer(String name) {
-        return null;
+        throw new RuntimeException("WTF is this for?");
     }
 
     @Override
     public Player getPlayer(UUID id) {
-        return null;
+        return SwPlayer.from(server.getPlayerManager().getPlayer(id));
     }
 
     @Override
@@ -213,6 +241,7 @@ public class SwukkitServer implements Server {
     @Override
     public World createWorld(WorldCreator creator) {
         return null;
+//        return CustomWorldManager.loadWorld(creator.name(), creator.seed(), server, GameMode.SURVIVAL);
     }
 
     @Override
@@ -496,12 +525,12 @@ public class SwukkitServer implements Server {
     }
 
     @Override
-    public CachedServerIcon loadServerIcon(File file) throws IllegalArgumentException, Exception {
+    public CachedServerIcon loadServerIcon(File file) {
         return null;
     }
 
     @Override
-    public CachedServerIcon loadServerIcon(BufferedImage image) throws IllegalArgumentException, Exception {
+    public CachedServerIcon loadServerIcon(BufferedImage image) {
         return null;
     }
 
@@ -522,7 +551,7 @@ public class SwukkitServer implements Server {
 
     @Override
     public UnsafeValues getUnsafe() {
-        return null;
+        throw new RuntimeException("No");
     }
 
     @Override
