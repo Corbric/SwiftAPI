@@ -13,7 +13,6 @@
     "PlayerManagerMixin",
     "ServerPlayerInteractionManagerMixin",
     "ServerPlayerNetworkHandlerMixin",
-    "abstraction.BukkitPlayerServerPlayerEntityMixin",
     "abstraction.ServerPlayerEntityMixin",
     "callback.DamageTrackerMixin",
     "callback.DedicatedServerMixin",

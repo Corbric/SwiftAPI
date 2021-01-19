@@ -43,8 +43,8 @@ dependencies {
     modCompile("net.fabricmc:fabric-loader-1.8.9:${project.loader_version}") {
         exclude module: "guava"
     }
-    implementation("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
-    include("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
+//    implementation("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
+//    include("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
 }
 
 processResources {

@@ -14,8 +14,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.UserCache;
 import net.minecraft.util.math.BlockPos;
 import net.swifthq.swiftapi.callbacks.entity.player.PlayerJoinCallback;
-import net.swifthq.swukkit.SwukkitServer;
-import org.bukkit.Bukkit;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -44,11 +42,6 @@ public abstract class PlayerManagerMixin {
 
     @Shadow
     public abstract void method_6230(ServerPlayerEntity player);
-
-    @Inject(method = "<init>", at = @At("TAIL"))
-    public void init(MinecraftServer server, CallbackInfo ci){
-        Bukkit.setServer(new SwukkitServer());
-    }
 
     /**
      * @author hydos

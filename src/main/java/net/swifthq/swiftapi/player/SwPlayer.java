@@ -5,9 +5,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Packet;
 import net.minecraft.util.Identifier;
 import net.swifthq.swiftapi.player.inventory.SwiftInventory;
-import org.bukkit.entity.Player;
 
-public interface SwPlayer extends Player {
+public interface SwPlayer {
 
     static SwPlayer from(ServerPlayerEntity playerEntity) {
         return (SwPlayer) playerEntity;
