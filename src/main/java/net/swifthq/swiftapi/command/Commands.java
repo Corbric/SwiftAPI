@@ -39,6 +39,9 @@ public class Commands {
 		ServerCommandSource source = commandContext.getSource();
 		source.sendFeedback(new LiteralText("Calling reload callback...").setStyle(new Style().setColor(Formatting.YELLOW).setItalic(true)));
 		int reloadedModCount = ReloadCallback.EVENT.invoker().onReload();
+		if(reloadedModCount == -1) {
+			source.sendFeedback(new LiteralText("One or more mods failed to reload! :(").setStyle(new Style().setColor(Formatting.RED).setItalic(true)));
+		}
 		source.sendFeedback(new LiteralText("Reloaded " + reloadedModCount + " mods!").setStyle(new Style().setColor(Formatting.GREEN).setItalic(true)));
 		return 0;
 	}

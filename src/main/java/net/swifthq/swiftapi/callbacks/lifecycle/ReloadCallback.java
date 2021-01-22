@@ -8,12 +8,18 @@ import net.minecraft.util.math.BlockPos;
 
 public interface ReloadCallback {
 
-    Event<ReloadCallback> EVENT = EventFactory.createArrayBacked(ReloadCallback.class, (listeners) -> () -> {
-        for (ReloadCallback callback : listeners) {
-            callback.onReload();
-        }
-        return listeners.length;
-    });
+	Event<ReloadCallback> EVENT = EventFactory.createArrayBacked(ReloadCallback.class, (listeners) -> () -> {
+		boolean failed = false;
+		for (ReloadCallback callback : listeners) {
+			if (callback.onReload() != 0) {
+				failed = true;
+			}
+		}
+		if(failed) {
+			return -1;
+		}
+		return listeners.length;
+	});
 
-    int onReload();
+	int onReload();
 }
