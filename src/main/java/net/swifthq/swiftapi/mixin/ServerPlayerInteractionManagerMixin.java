@@ -44,7 +44,7 @@ public class ServerPlayerInteractionManagerMixin {
     }
 
     @Inject(method = "method_6091", at = @At("HEAD"), cancellable = true)
-    public void onInteract(PlayerEntity playerEntity, World world, ItemStack itemStack, BlockPos blockPos, Direction direction, float f, float g, float h, CallbackInfoReturnable<Boolean> cir) {
+    public void onInteract(PlayerEntity playerEntity, World world, ItemStack itemStack, BlockPos blockPos, Direction direction, float x, float y, float z, CallbackInfoReturnable<Boolean> cir) {
         // TODO: in PlayerConnection line 717 has something to detect air right clicks. need to implement someone help please
         if(PlayerItemInteractCallback.EVENT.invoker().interactItem(playerEntity, itemStack) == ActionResult.FAIL){
             cir.setReturnValue(false);
