@@ -27,6 +27,10 @@ public class Commands {
 				dispatcher.register(literal("reload")
 						.requires(commandSource -> commandSource.hasPermissionLevel(4))
 						.executes(Commands::executeReload));
+
+				dispatcher.register(literal("rl")
+						.requires(commandSource -> commandSource.hasPermissionLevel(4))
+						.executes(Commands::executeReload));
 			}
 		});
 	}
