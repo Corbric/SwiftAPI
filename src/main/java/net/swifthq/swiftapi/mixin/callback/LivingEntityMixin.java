@@ -4,7 +4,7 @@ import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import net.swifthq.swiftapi.callbacks.entity.damage.EntityDamageCallback;
 import net.swifthq.swiftapi.callbacks.entity.player.damage.PlayerDamageCallback;

@@ -3,7 +3,7 @@ package net.swifthq.swiftapi.callbacks.lifecycle;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.fabricmc.fabric.impl.base.util.ActionResult;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
 public interface ReloadCallback {

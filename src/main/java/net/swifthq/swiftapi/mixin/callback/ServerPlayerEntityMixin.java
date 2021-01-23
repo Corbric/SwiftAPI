@@ -1,7 +1,7 @@
 package net.swifthq.swiftapi.mixin.callback;
 
 import net.fabricmc.fabric.impl.base.util.ActionResult;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.swifthq.swiftapi.callbacks.inventory.InventoryOpenCallback;
 import org.spongepowered.asm.mixin.Mixin;

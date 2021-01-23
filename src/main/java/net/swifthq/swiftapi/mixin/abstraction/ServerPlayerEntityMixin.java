@@ -1,6 +1,6 @@
 package net.swifthq.swiftapi.mixin.abstraction;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;

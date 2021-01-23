@@ -1,7 +1,7 @@
 package net.swifthq.swiftapi.mixin;
 
 import net.minecraft.server.dedicated.DedicatedPlayerManager;
-import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.dedicated.MinecraftDedicatedServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -11,8 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class DedicatedPlayerManagerMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    public void init(DedicatedServer server, CallbackInfo ci){
-
+    public void init(MinecraftDedicatedServer server, CallbackInfo ci){
     }
-
 }

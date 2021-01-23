@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.event.EventFactory;
 import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public interface PlayerSaturationCallback {
 

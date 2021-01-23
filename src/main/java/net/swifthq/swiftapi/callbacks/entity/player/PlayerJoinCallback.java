@@ -2,7 +2,7 @@ package net.swifthq.swiftapi.callbacks.entity.player;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public interface PlayerJoinCallback {
 

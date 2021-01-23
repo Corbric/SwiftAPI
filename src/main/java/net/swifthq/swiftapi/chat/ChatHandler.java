@@ -1,7 +1,6 @@
 package net.swifthq.swiftapi.chat;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.swifthq.swiftapi.player.SwPlayer;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 /**
  * basic handler for handling chat messages.

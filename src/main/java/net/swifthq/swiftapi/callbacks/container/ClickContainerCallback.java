@@ -2,8 +2,8 @@ package net.swifthq.swiftapi.callbacks.container;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public interface ClickContainerCallback {
 

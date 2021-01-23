@@ -1,6 +1,6 @@
 package net.swifthq.swiftapi.player;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Packet;
 import net.minecraft.util.Identifier;
