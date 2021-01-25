@@ -11,13 +11,12 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.level.LevelInfo;
 import net.swifthq.swiftapi.callbacks.container.ClickContainerCallback;
-import net.swifthq.swiftapi.callbacks.entity.player.PlayerItemInteractCallback;
+import net.swifthq.swiftapi.callbacks.entity.player.ItemInteractCallback;
 import net.swifthq.swiftapi.chat.ChatManager;
+import net.swifthq.swiftapi.player.SwPlayer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -64,29 +63,18 @@ public abstract class ServerPlayerNetworkHandlerMixin {
 	public void handleAirInteractions(BlockPlacementC2SPacket packet, CallbackInfo ci) {
 		World world = player.getWorld();
 		Block clickedBlock = world.getBlockState(packet.getPos()).getBlock();
-		if (packet.getDirectionId() == 255 && clickedBlock == Blocks.AIR && isNotRogueArmswing(player)) {
+		HitResult result = ((SwPlayer) player).getLookingAt();
+		if (packet.getDirectionId() == 255 && clickedBlock == Blocks.AIR && isNotRogueArmswing(result)) {
 			if (!world.isClient) {
-				if (PlayerItemInteractCallback.EVENT.invoker().interactItem(player, player.getMainHandStack()) == ActionResult.FAIL) {
+				BlockPos pos = result == null ? null : result.getBlockPos();
+				if (ItemInteractCallback.EVENT.invoker().interactItem(player, pos, player.getMainHandStack()) == ActionResult.FAIL) {
 					ci.cancel();
 				}
 			}
 		}
 	}
 
-	private boolean isNotRogueArmswing(ServerPlayerEntity player) {
-		Vec3d playerPos = new Vec3d(this.player.x, this.player.y + (double) this.player.getEyeHeight(), this.player.z);
-
-		float pitch = this.player.pitch;
-		float yaw = this.player.yaw;
-		float f3 = MathHelper.cos(-yaw * 0.017453292F - 3.1415927F);
-		float f4 = MathHelper.sin(-yaw * 0.017453292F - 3.1415927F);
-		float f5 = -MathHelper.cos(-pitch * 0.017453292F);
-		float f6 = MathHelper.sin(-pitch * 0.017453292F);
-		float f7 = f4 * f5;
-		float f8 = f3 * f5;
-		double reachDistance = player.interactionManager.getGameMode() == LevelInfo.GameMode.CREATIVE ? 5.0D : 4.5D;
-		Vec3d endRaytracePoint = playerPos.add((double) f7 * reachDistance, (double) f6 * reachDistance, (double) f8 * reachDistance);
-		HitResult hitResult = this.player.world.rayTrace(playerPos, endRaytracePoint, false, false, false);
+	private boolean isNotRogueArmswing(HitResult hitResult) {
 		return hitResult == null || hitResult.type != HitResult.Type.BLOCK;
 	}
 }

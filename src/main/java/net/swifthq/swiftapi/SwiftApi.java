@@ -26,6 +26,7 @@ import net.swifthq.swiftapi.command.Commands;
 import net.swifthq.swiftapi.config.ConfigManager;
 import net.swifthq.swiftapi.config.SwiftApiConfig;
 import net.swifthq.swiftapi.gson.*;
+import net.swifthq.swiftapi.selection.SelectionCallbacks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -84,6 +85,10 @@ public class SwiftApi implements ModInitializer {
 				.orElseThrow(() -> new RuntimeException("Failed to grab mod version info"));
 	}
 
+	public static Identifier id(String path) {
+		return new Identifier(MODID, path);
+	}
+
 	private void initializeConfig() {
 		Optional<SwiftApiConfig> optional = ConfigManager.read("config", SwiftApiConfig.class);
 		config = optional.orElseGet(SwiftApiConfig::new);
@@ -94,6 +99,7 @@ public class SwiftApi implements ModInitializer {
 	public void onInitialize() {
 		new ChatManager();
 		initializeConfig();
+		SelectionCallbacks.initialize();
 		Commands.initialize(config);
 		LOGGER.info("Swift API loaded!");
 		LOGGER.info("Running version: " + getVersion());

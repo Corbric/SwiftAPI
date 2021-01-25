@@ -4,9 +4,17 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Packet;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.level.LevelInfo;
+import net.swifthq.swiftapi.SwiftApi;
 import net.swifthq.swiftapi.player.inventory.SwiftInventory;
 
 public interface SwPlayer {
+
+    Identifier SELECTION_POS_1 = SwiftApi.id("pos1");
+    Identifier SELECTION_POS_2 = SwiftApi.id("pos2");
 
     static SwPlayer from(ServerPlayerEntity playerEntity) {
         return (SwPlayer) playerEntity;
@@ -56,4 +64,6 @@ public interface SwPlayer {
      * @param packet the packet to send to the player
      */
     void sendPacket(Packet<?> packet);
+
+    HitResult getLookingAt();
 }

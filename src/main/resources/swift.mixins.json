@@ -6,8 +6,9 @@
   "mixins": [
     "BlockPatternResultMixin",
     "BlockPosMixin",
+    "ClientConnectionMixin",
     "DedicatedPlayerManagerMixin",
-    "DedicatedServerMixin",
+    "MinecraftDedicatedServerMixin",
     "DimensionMixin",
     "MinecraftServerMixin",
     "PlayerManagerMixin",
@@ -15,7 +16,6 @@
     "ServerPlayerNetworkHandlerMixin",
     "abstraction.ServerPlayerEntityMixin",
     "callback.DamageTrackerMixin",
-    "callback.DedicatedServerMixin",
     "callback.HungerManagerMixin",
     "callback.LivingEntityMixin",
     "callback.ServerPlayerEntityMixin"
