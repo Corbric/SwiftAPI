@@ -1,6 +1,6 @@
 plugins {
+    id 'fabric-loom' version "0.7-SNAPSHOT"
     id 'maven-publish'
-    id 'fabric-loom' version "0.4-SNAPSHOT"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -19,32 +19,30 @@ repositories {
     }
     maven {
         name = 'Fabric'
-        url = 'http://maven.fabricmc.net/'
+        url = 'https://maven.fabricmc.net/'
     }
     maven {
         name = 'legacy-fabric'
-        url = 'https://dl.bintray.com/legacy-fabric/Legacy-Fabric-Maven'
+        url = 'https://maven.legacyfabric.net'
     }
 }
 
 minecraft {
     intermediaryUrl = {
-        return "https://dl.bintray.com/legacy-fabric/Legacy-Fabric-Maven/net/fabricmc/intermediary/" + it + "/intermediary-" + it + "-v2.jar"
+        return "https://maven.legacyfabric.net/net/fabricmc/intermediary/" + it + "/intermediary-" + it + "-v2.jar";
     }
     accessWidener "src/main/resources/swiftapi.aw"
 }
 
 dependencies {
-    compile "com.google.guava:guava:23.5-jre"
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.10.3"
     modImplementation('it.unimi.dsi:fastutil:8.2.2')
-    modCompile("net.fabricmc:fabric-loader-1.8.9:${project.loader_version}") {
-        exclude module: "guava"
-    }
-//    implementation("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
-//    include("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
+    implementation("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
+    include("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
 }
 
 processResources {

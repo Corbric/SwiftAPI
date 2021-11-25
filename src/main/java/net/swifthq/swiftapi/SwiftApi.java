@@ -3,24 +3,17 @@ package net.swifthq.swiftapi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.DispatcherRegistrationCallback;
-import net.fabricmc.fabric.api.command.v1.ServerCommandSource;
-import net.fabricmc.fabric.api.event.server.FabricCommandRegisteredCallback;
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.Tag;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.LowercaseEnumTypeAdapterFactory;
 import net.minecraft.util.math.BlockPos;
-import net.swifthq.swiftapi.callbacks.lifecycle.ReloadCallback;
 import net.swifthq.swiftapi.chat.ChatManager;
 import net.swifthq.swiftapi.command.Commands;
 import net.swifthq.swiftapi.config.ConfigManager;
@@ -30,14 +23,11 @@ import net.swifthq.swiftapi.selection.SelectionCallbacks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
 import java.util.Optional;
-
-import static net.fabricmc.fabric.api.command.v1.CommandManager.literal;
 
 public class SwiftApi implements ModInitializer {
 
-	public static final String MODID = "swiftapi";
+	public static final String MOD_ID = "swiftapi";
 	public static final Logger LOGGER = LogManager.getLogger("Swift API");
 	public static final Gson GSON = createDefaultBuilder().create();
 	public static SwiftApiConfig config;
@@ -80,13 +70,13 @@ public class SwiftApi implements ModInitializer {
 	 * @return the mods version
 	 */
 	public static String getVersion() {
-		return FabricLoader.getInstance().getModContainer(MODID)
+		return FabricLoader.getInstance().getModContainer(MOD_ID)
 				.map(container -> container.getMetadata().getVersion().getFriendlyString())
 				.orElseThrow(() -> new RuntimeException("Failed to grab mod version info"));
 	}
 
 	public static Identifier id(String path) {
-		return new Identifier(MODID, path);
+		return new Identifier(MOD_ID, path);
 	}
 
 	private void initializeConfig() {

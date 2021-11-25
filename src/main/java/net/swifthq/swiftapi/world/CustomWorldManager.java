@@ -1,8 +1,8 @@
 package net.swifthq.swiftapi.world;
 
-import net.minecraft.class_629;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.AnvilWorldSaveHandler;
 import net.minecraft.world.SaveHandler;
 import net.minecraft.world.level.LevelGeneratorType;
 import net.minecraft.world.level.LevelInfo;
@@ -33,7 +33,7 @@ public class CustomWorldManager {
 
         int dimId = 3 + customWorldCount;
 
-        SaveHandler saveHandler = new class_629(worldFolder, name, true);
+        SaveHandler saveHandler = new AnvilWorldSaveHandler(worldFolder, name, true);
         LevelProperties properties = new LevelProperties(new LevelInfo(seed, gameMode, false, false, LevelGeneratorType.FLAT), name);
 
         ServerWorld world = new ServerWorld(server, saveHandler, properties, dimId, server.profiler);
