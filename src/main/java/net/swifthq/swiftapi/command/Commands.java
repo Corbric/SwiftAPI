@@ -1,8 +1,8 @@
 package net.swifthq.swiftapi.command;
 
 import com.mojang.brigadier.context.CommandContext;
-import net.fabricmc.fabric.api.command.v1.DispatcherRegistrationCallback;
-import net.fabricmc.fabric.api.command.v1.ServerCommandSource;
+import net.legacyfabric.fabric.api.command.v1.DispatcherRegistrationCallback;
+import net.legacyfabric.fabric.api.command.v1.ServerCommandSource;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.text.LiteralText;
@@ -14,7 +14,7 @@ import net.swifthq.swiftapi.config.SwiftApiConfig;
 
 import java.util.Collection;
 
-import static net.fabricmc.fabric.api.command.v1.CommandManager.literal;
+import static net.legacyfabric.fabric.api.command.v1.CommandManager.literal;
 
 public class Commands {
 

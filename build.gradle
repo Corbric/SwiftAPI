@@ -12,7 +12,6 @@ group = project.maven_group
 
 repositories {
     mavenCentral()
-    jcenter()
     maven {
         name = "Spigot"
         url = "https://hub.spigotmc.org/nexus/content/groups/public/"
@@ -39,8 +38,10 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.10.3"
-    modImplementation('it.unimi.dsi:fastutil:8.2.2')
+    modImplementation ("net.legacyfabric.legacy-fabric-api:legacy-fabric-api:1.1.0+1.8.9") {
+        exclude module: "fabric-loader-1.8.9"
+    }
+    modImplementation("it.unimi.dsi:fastutil:8.5.6")
     implementation("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
     include("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
 }
@@ -69,23 +70,4 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 jar {
     from "LICENSE"
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-    }
-    repositories {
-        maven {
-            name = "swiftRepo"
-            url = "/home/hayden/Documents/Projects/SwiftRepo"
-        }
-    }
 }

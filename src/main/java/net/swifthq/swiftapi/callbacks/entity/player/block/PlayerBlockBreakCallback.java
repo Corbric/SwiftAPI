@@ -1,7 +1,7 @@
 package net.swifthq.swiftapi.callbacks.entity.player.block;
 
-import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.event.EventFactory;
+import net.legacyfabric.fabric.api.event.Event;
+import net.legacyfabric.fabric.api.event.EventFactory;
 import net.fabricmc.fabric.impl.base.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 

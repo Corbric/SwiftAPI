@@ -1,7 +1,7 @@
 package net.swifthq.swiftapi.callbacks.world;
 
-import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.event.EventFactory;
+import net.legacyfabric.fabric.api.event.Event;
+import net.legacyfabric.fabric.api.event.EventFactory;
 
 public interface PreWorldReadyCallback {
 

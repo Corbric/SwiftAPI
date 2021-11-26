@@ -48,12 +48,12 @@ public abstract class PlayerManagerMixin {
      * @reason because serverside dimensions
      */
     @Overwrite
-    public void teleportToDimension(ServerPlayerEntity player, int i) {
+    public void teleportToDimension(ServerPlayerEntity player, int dimension) {
         int oldDimId = player.dimension;
         ServerWorld oldWorld = this.server.getWorld(player.dimension);
-        player.dimension = i;
+        player.dimension = dimension;
         ServerWorld newWorld;
-        newWorld = server.getWorld(i);
+        newWorld = server.getWorld(dimension);
         player.networkHandler.sendPacket(new PlayerRespawnS2CPacket(0, oldWorld.getGlobalDifficulty(), oldWorld.levelProperties.getGeneratorType(), player.interactionManager.getGameMode()));
         player.networkHandler.sendPacket(new PlayerRespawnS2CPacket(player.dimension, player.world.getGlobalDifficulty(), player.world.levelProperties.getGeneratorType(), player.interactionManager.getGameMode()));
         oldWorld.method_404(player);

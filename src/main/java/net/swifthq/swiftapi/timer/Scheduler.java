@@ -2,7 +2,7 @@ package net.swifthq.swiftapi.timer;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.legacyfabric.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.MinecraftServer;
 
 import java.util.ArrayList;

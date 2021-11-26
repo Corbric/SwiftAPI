@@ -28,7 +28,7 @@ public abstract class ClientConnectionMixin extends SimpleChannelInboundHandler<
 
 	@Shadow private Channel channel;
 
-	@Shadow public abstract void send(Packet packet, GenericFutureListener<? extends Future<? super Void>> genericFutureListener, GenericFutureListener<? extends Future<? super Void>>... genericFutureListeners);
+	@Shadow public abstract void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> genericFutureListener, GenericFutureListener<? extends Future<? super Void>>... genericFutureListeners);
 
 	private boolean errored;
 
