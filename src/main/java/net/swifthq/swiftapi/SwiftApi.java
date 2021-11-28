@@ -15,7 +15,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.LowercaseEnumTypeAdapterFactory;
 import net.minecraft.util.math.BlockPos;
 import net.swifthq.swiftapi.chat.ChatManager;
-import net.swifthq.swiftapi.command.Commands;
 import net.swifthq.swiftapi.config.ConfigManager;
 import net.swifthq.swiftapi.config.SwiftApiConfig;
 import net.swifthq.swiftapi.gson.*;
@@ -90,7 +89,6 @@ public class SwiftApi implements ModInitializer {
 		new ChatManager();
 		initializeConfig();
 		SelectionCallbacks.initialize();
-		Commands.initialize(config);
 		LOGGER.info("Swift API loaded!");
 		LOGGER.info("Running version: " + getVersion());
 	}

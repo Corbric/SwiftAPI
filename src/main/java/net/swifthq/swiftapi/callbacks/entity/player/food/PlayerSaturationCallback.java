@@ -2,7 +2,7 @@ package net.swifthq.swiftapi.callbacks.entity.player.food;
 
 import net.legacyfabric.fabric.api.event.Event;
 import net.legacyfabric.fabric.api.event.EventFactory;
-import net.fabricmc.fabric.impl.base.util.ActionResult;
+import net.swifthq.swiftapi.util.ActionResult;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;

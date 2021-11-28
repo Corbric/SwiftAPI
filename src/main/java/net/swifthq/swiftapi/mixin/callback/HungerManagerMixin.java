@@ -1,6 +1,6 @@
 package net.swifthq.swiftapi.mixin.callback;
 
-import net.fabricmc.fabric.impl.base.util.ActionResult;
+import net.swifthq.swiftapi.util.ActionResult;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.swifthq.swiftapi.callbacks.entity.player.food.PlayerSaturationCallback;

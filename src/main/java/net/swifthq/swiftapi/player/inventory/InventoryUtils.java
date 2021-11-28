@@ -1,6 +1,6 @@
 package net.swifthq.swiftapi.player.inventory;
 
-import net.fabricmc.fabric.impl.base.util.ActionResult;
+import net.swifthq.swiftapi.util.ActionResult;
 import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.network.packet.c2s.play.ClickWindowC2SPacket;

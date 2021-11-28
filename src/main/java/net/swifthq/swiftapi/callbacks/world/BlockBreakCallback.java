@@ -2,7 +2,7 @@ package net.swifthq.swiftapi.callbacks.world;
 
 import net.legacyfabric.fabric.api.event.Event;
 import net.legacyfabric.fabric.api.event.EventFactory;
-import net.fabricmc.fabric.impl.base.util.ActionResult;
+import net.swifthq.swiftapi.util.ActionResult;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;

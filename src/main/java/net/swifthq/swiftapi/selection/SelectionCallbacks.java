@@ -1,6 +1,6 @@
 package net.swifthq.swiftapi.selection;
 
-import net.fabricmc.fabric.impl.base.util.ActionResult;
+import net.swifthq.swiftapi.util.ActionResult;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;

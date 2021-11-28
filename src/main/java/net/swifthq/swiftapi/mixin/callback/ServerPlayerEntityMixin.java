@@ -1,6 +1,6 @@
 package net.swifthq.swiftapi.mixin.callback;
 
-import net.fabricmc.fabric.impl.base.util.ActionResult;
+import net.swifthq.swiftapi.util.ActionResult;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.swifthq.swiftapi.callbacks.inventory.InventoryOpenCallback;
